@@ -1,0 +1,448 @@
+/* WYTH — Premium Auth Theme (Royal Violet · Cleaner Premium)
+   Mobile-first, keyboard-flicker safe, single soft radial glow.
+   CSS-only refresh — no JSX/logic changes. */
+
+.wyth-auth {
+  /* Royal violet palette */
+  --w-bg-0:   #0f0a1f;
+  --w-bg-1:   #150c28;
+  --w-bg-2:   #1c1235;
+  --w-purple: #a855f7;
+  --w-violet: #7c3aed;
+  --w-accent: #c084fc;
+  --w-line:   rgba(168, 85, 247, 0.18);
+  --w-line-2: rgba(168, 85, 247, 0.32);
+  --w-soft:   rgba(168, 85, 247, 0.08);
+  --w-ivory:  #f4ecff;
+  --w-mute:   #9b8fb8;
+  --w-glass:  rgba(20, 14, 38, 0.72);
+
+  position: relative;
+  /* Mobile keyboard flicker fix: use 100dvh (dynamic vh) with safe fallbacks */
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 18px;
+  padding-bottom: max(36px, env(safe-area-inset-bottom));
+  padding-top:    max(36px, env(safe-area-inset-top));
+  color: var(--w-ivory);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  /* Single, solid royal violet background + one soft radial glow */
+  background:
+    radial-gradient(60% 50% at 50% 18%, rgba(124, 58, 237, 0.28) 0%, rgba(124, 58, 237, 0) 65%),
+    linear-gradient(180deg, #0f0a1f 0%, #0a0717 100%);
+  background-attachment: fixed; /* keep glow stable under keyboard */
+  /* allow scroll if keyboard reduces viewport (no overflow:hidden) */
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Remove heavy aurora/stars/grid effects (divs remain in JSX but are hidden) */
+.wyth-aurora,
+.wyth-aurora-1,
+.wyth-aurora-2,
+.wyth-aurora-3,
+.wyth-grid,
+.wyth-stars {
+  display: none !important;
+}
+
+/* Shell */
+.wyth-shell {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  z-index: 2;
+  animation: wyth-rise 520ms cubic-bezier(.2,.7,.2,1) both;
+}
+@keyframes wyth-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Brand */
+.wyth-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.wyth-logo {
+  position: relative;
+  width: 56px; height: 56px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+  box-shadow:
+    0 8px 24px rgba(124, 58, 237, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+.wyth-logo-w {
+  font-family: 'Fraunces', serif;
+  font-weight: 600; font-size: 26px; color: #fff;
+  letter-spacing: 0.02em;
+}
+/* Subtle ring — no aggressive pulse to avoid mobile repaint cost */
+.wyth-logo-ring {
+  position: absolute; inset: -5px;
+  border-radius: 50%;
+  border: 1px solid rgba(168, 85, 247, 0.35);
+}
+.wyth-wordmark {
+  margin: 4px 0 0;
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 32px;
+  letter-spacing: 0.32em;
+  text-indent: 0.32em;
+  background: linear-gradient(180deg, #f4ecff 0%, #c4b5fd 70%, #a855f7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.wyth-tagline {
+  margin: 0;
+  font-size: 10.5px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #c4b5fd;
+  opacity: 0.85;
+}
+
+/* Card — cleaner premium dark-purple, no gradient stroke noise */
+.wyth-card {
+  position: relative;
+  width: 100%;
+  border-radius: 20px;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+/* Single soft radial glow behind card */
+.wyth-card-glow {
+  position: absolute;
+  inset: -40px -20px;
+  border-radius: 32px;
+  z-index: -1;
+  background: radial-gradient(60% 60% at 50% 0%, rgba(168, 85, 247, 0.22), transparent 70%);
+  filter: blur(28px);
+  opacity: 1;
+  pointer-events: none;
+}
+.wyth-card-inner {
+  position: relative;
+  border-radius: 20px;
+  padding: 30px 26px 24px;
+  background: linear-gradient(180deg, rgba(28, 18, 53, 0.92) 0%, rgba(18, 11, 36, 0.94) 100%);
+  border: 1px solid var(--w-line);
+  box-shadow:
+    0 20px 50px rgba(10, 5, 25, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+.wyth-card-inner::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.45), transparent);
+  pointer-events: none;
+}
+
+/* Header */
+.wyth-card-header { text-align: center; margin-bottom: 22px; }
+.wyth-eyebrow {
+  display: inline-block;
+  font-size: 10.5px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: #c4b5fd;
+  margin: 0 0 10px;
+  padding: 5px 12px;
+  border: 1px solid var(--w-line);
+  border-radius: 999px;
+  background: var(--w-soft);
+}
+.wyth-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1.15;
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+  color: #f4ecff;
+}
+.wyth-title-accent {
+  background: linear-gradient(135deg, #c084fc 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-style: italic;
+}
+.wyth-subtitle {
+  font-size: 13px;
+  color: var(--w-mute);
+  margin: 0;
+}
+
+/* Form */
+.wyth-form { display: flex; flex-direction: column; gap: 14px; }
+.wyth-row  { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 420px) { .wyth-row { grid-template-columns: 1fr; } }
+
+.wyth-field { display: flex; flex-direction: column; gap: 8px; }
+.wyth-label {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #c4b5fd;
+  font-weight: 500;
+}
+
+.wyth-input-wrap { position: relative; }
+.wyth-input {
+  width: 100% !important;
+  height: 50px !important;
+  background: rgba(15, 10, 31, 0.7) !important;
+  border: 1px solid var(--w-line) !important;
+  color: var(--w-ivory) !important;
+  border-radius: 12px !important;
+  padding: 0 16px !important;
+  font-size: 16px !important; /* >=16px prevents iOS zoom + keyboard jump */
+  letter-spacing: 0.01em;
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+.wyth-input::placeholder { color: #6b5b8a; }
+.wyth-input:focus {
+  border-color: var(--w-purple) !important;
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.18) !important;
+  outline: none !important;
+  background: rgba(28, 18, 53, 0.85) !important;
+}
+.wyth-input-with-action { padding-right: 72px !important; }
+.wyth-input-action {
+  position: absolute;
+  right: 8px; top: 50%; transform: translateY(-50%);
+  height: 32px; padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--w-line);
+  background: rgba(168, 85, 247, 0.08);
+  color: #c4b5fd;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color .2s ease, background-color .2s ease, border-color .2s ease;
+}
+.wyth-input-action:hover {
+  color: #fff;
+  background: rgba(168, 85, 247, 0.18);
+  border-color: var(--w-purple);
+}
+.wyth-input-action:active { transform: translateY(-50%) scale(0.96); }
+
+.wyth-alert {
+  background: rgba(220, 38, 38, 0.10) !important;
+  border: 1px solid rgba(248, 113, 113, 0.35) !important;
+  color: #fecaca !important;
+  border-radius: 12px;
+}
+
+/* Submit Button — centered, premium royal violet */
+.wyth-button {
+  position: relative;
+  overflow: hidden;
+  width: 100% !important;
+  height: 52px !important;
+  margin: 8px auto 0;
+  padding: 0 !important;
+  border-radius: 12px !important;
+  border: none !important;
+  color: #fff !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em;
+  font-size: 14px !important;
+  cursor: pointer;
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 55%, #8b5cf6 100%) !important;
+  box-shadow:
+    0 10px 26px rgba(124, 58, 237, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  /* CENTERED contents */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  text-align: center;
+  transition: transform .18s ease, box-shadow .25s ease, filter .2s ease;
+}
+.wyth-button:hover {
+  filter: brightness(1.06);
+  box-shadow:
+    0 14px 32px rgba(124, 58, 237, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+.wyth-button:active {
+  transform: scale(0.985);
+  filter: brightness(0.98);
+}
+.wyth-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+.wyth-button-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  line-height: 1;
+}
+
+/* Shine: keep, but lighter & off on reduced-motion.
+   Use !important on positioning to override the global `.btn-luxe > *`
+   rule (App.css) which forces `position: relative` on direct children
+   and would otherwise pull the shine into the flex flow, breaking both
+   the text centering AND the full-surface sweep. */
+.wyth-button-shine {
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: -75%;
+  width: 60%;
+  height: 100% !important;
+  z-index: 1 !important;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.32) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  animation: wyth-shine 5s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes wyth-shine {
+  0%, 100% { left: -75%; }
+  55%      { left: 175%; }
+}
+
+/* Divider */
+.wyth-divider {
+  display: flex; align-items: center; justify-content: center;
+  margin: 22px 0 14px; gap: 14px;
+  color: #c4b5fd; font-size: 9px; opacity: 0.7;
+}
+.wyth-divider::before, .wyth-divider::after {
+  content: ""; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--w-line-2), transparent);
+}
+
+/* Sign In / Sign Up switch — premium tab-like interaction
+   (Single inline link; we treat it as the active "switch" affordance.) */
+.wyth-switch {
+  text-align: center;
+  font-size: 13px;
+  color: var(--w-mute);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.wyth-link {
+  position: relative;
+  background: rgba(168, 85, 247, 0.10);
+  border: 1px solid var(--w-line);
+  padding: 7px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  color: #f4ecff;
+  /* Sliding pill highlight */
+  background-image: linear-gradient(135deg, rgba(168, 85, 247, 0.18), rgba(124, 58, 237, 0.18));
+  transition:
+    transform .18s cubic-bezier(.2,.7,.2,1),
+    background-color .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease,
+    color .2s ease;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  touch-action: manipulation;
+}
+.wyth-link::after {
+  /* sliding underline indicator */
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #c084fc, #a855f7);
+  transform: translateX(-50%);
+  transition: width .28s cubic-bezier(.2,.7,.2,1), opacity .2s ease;
+  opacity: 0;
+}
+.wyth-link:hover {
+  color: #fff;
+  border-color: var(--w-line-2);
+  background-color: rgba(168, 85, 247, 0.18);
+  box-shadow: 0 6px 18px rgba(168, 85, 247, 0.25), 0 0 0 1px rgba(168, 85, 247, 0.15);
+  transform: translateY(-1px);
+}
+.wyth-link:hover::after { width: 60%; opacity: 1; }
+.wyth-link:focus-visible {
+  outline: none;
+  border-color: var(--w-purple);
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.28);
+}
+.wyth-link:active {
+  transform: scale(0.96);
+  box-shadow: 0 3px 10px rgba(168, 85, 247, 0.3) inset, 0 0 0 1px rgba(168, 85, 247, 0.25);
+  background-color: rgba(168, 85, 247, 0.28);
+}
+.wyth-link:active::after { width: 70%; opacity: 1; }
+
+.wyth-footnote {
+  margin: 4px 0 0;
+  font-size: 10.5px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #6b5b8a;
+  text-align: center;
+}
+
+/* iOS / Android keyboard stability */
+@supports (height: 100dvh) {
+  .wyth-auth { min-height: 100dvh; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .wyth-shell,
+  .wyth-button,
+  .wyth-link,
+  .wyth-input,
+  .wyth-input-action { animation: none !important; transition: none !important; }
+  .wyth-button-shine { display: none !important; }
+}
+
+/* Very small screens */
+@media (max-width: 380px) {
+  .wyth-card-inner { padding: 26px 20px 22px; }
+  .wyth-title { font-size: 28px; }
+  .wyth-wordmark { font-size: 28px; }
+}

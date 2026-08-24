@@ -1,0 +1,13 @@
+[build]
+  command = "yarn install && yarn build"
+  publish = "build"
+
+[build.environment]
+  NODE_VERSION = "20"
+  CI = "false"
+
+# SPA fallback: all unknown routes return index.html
+[[redirects]]
+  from = "/*"
+  to   = "/index.html"
+  status = 200

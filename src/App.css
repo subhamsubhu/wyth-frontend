@@ -1,0 +1,1020 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ───────────────────── WYTH premium animations ───────────────────── */
+@keyframes wyth-bell-flutter {
+  0%   { transform: rotate(0); }
+  10%  { transform: rotate(-18deg); }
+  20%  { transform: rotate(16deg); }
+  30%  { transform: rotate(-14deg); }
+  40%  { transform: rotate(12deg); }
+  50%  { transform: rotate(-9deg); }
+  60%  { transform: rotate(7deg); }
+  70%  { transform: rotate(-5deg); }
+  80%  { transform: rotate(3deg); }
+  90%  { transform: rotate(-1.5deg); }
+  100% { transform: rotate(0); }
+}
+.wyth-bell-flutter {
+  transform-origin: 50% 10%;
+  animation: wyth-bell-flutter 1.4s cubic-bezier(.4,0,.2,1) 1;
+}
+
+@keyframes wyth-bell-badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.55), 0 0 10px rgba(239, 68, 68, 0.7); }
+  50%      { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.0), 0 0 18px rgba(239, 68, 68, 0.9); }
+}
+.wyth-bell-badge-pulse { animation: wyth-bell-badge-pulse 2.4s ease-in-out infinite; }
+
+@keyframes wyth-fade-in { from { opacity: 0; } to { opacity: 1; } }
+.wyth-fade-in { animation: wyth-fade-in .22s ease-out both; }
+
+@keyframes wyth-slide-up {
+  from { transform: translateY(28px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+.wyth-slide-up { animation: wyth-slide-up .35s cubic-bezier(.2,.8,.2,1) both; }
+
+@keyframes wyth-glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, .25); }
+  50%      { box-shadow: 0 0 22px 4px rgba(168, 85, 247, .45); }
+}
+.wyth-glow-pulse { animation: wyth-glow-pulse 3s ease-in-out infinite; }
+
+/* Premium scrollbar inside cards */
+.wyth-scroll::-webkit-scrollbar { width: 6px; }
+.wyth-scroll::-webkit-scrollbar-track { background: transparent; }
+.wyth-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(168,85,247,.4), rgba(236,72,153,.4));
+  border-radius: 3px;
+}
+.wyth-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(168,85,247,.6), rgba(236,72,153,.6));
+}
+
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 271.5 91% 65.1%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 271.5 91% 65.1% / 0.2;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 271.5 91% 65.1%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-slate-900 text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.7);
+}
+
+/* Glassmorphism Effect */
+.glass {
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.glass-strong {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+/* Smooth Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(236, 72, 153, 0.5);
+  }
+}
+
+.animate-glow {
+  animation: glow 3s ease-in-out infinite;
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(to right, #a78bfa, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Neon Border Effect */
+.neon-border {
+  position: relative;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.neon-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg, #a78bfa, #ec4899, #a78bfa);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: -1;
+  filter: blur(10px);
+}
+
+.neon-border:hover::before {
+  opacity: 0.7;
+}
+
+/* Video Container */
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.video-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* PIP Window */
+.pip-window {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 320px;
+  height: 180px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 2px solid rgba(139, 92, 246, 0.5);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  resize: both;
+}
+
+/* Chat Container */
+.chat-container {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.chat-message {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* Call Window */
+.call-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 1200px;
+  height: 80vh;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(139, 92, 246, 0.5);
+  border-radius: 16px;
+  z-index: 9998;
+}
+
+/* Floating Controls */
+.floating-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 9999px;
+  padding: 12px 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   GLOBAL: every native <button> gets a smooth, luxurious press
+   feedback automatically — without touching individual files.
+   Opt out by adding `.no-luxe-press` to a button.
+   ───────────────────────────────────────────────────────────── */
+button:not(.no-luxe-press):not(:disabled) {
+  transition:
+    transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 240ms ease,
+    border-color 240ms ease,
+    color 200ms ease,
+    filter 240ms ease;
+  will-change: transform;
+}
+
+button:not(.no-luxe-press):not(:disabled):hover {
+  filter: brightness(1.08) saturate(1.05);
+}
+
+button:not(.no-luxe-press):not(:disabled):active {
+  transform: scale(0.955);
+  transition:
+    transform 90ms cubic-bezier(0.4, 0, 0.6, 1),
+    box-shadow 90ms ease,
+    filter 90ms ease;
+  filter: brightness(0.96);
+}
+
+button:not(.no-luxe-press):focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px rgba(167, 139, 250, 0.55),
+    0 0 22px -6px rgba(167, 139, 250, 0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button:not(.no-luxe-press):not(:disabled):active {
+    transform: scale(0.985);
+  }
+}
+
+/* Smooth Transitions */
+.transition-all {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Luxurious Buttons — Glassmorphic, Subtle Glow, Smooth Click
+   ───────────────────────────────────────────────────────────── */
+.btn-luxe {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.95);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.85rem;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.25),
+    0 6px 18px -8px rgba(0, 0, 0, 0.5),
+    0 0 0 0 rgba(139, 92, 246, 0);
+  transition:
+    transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 380ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 320ms ease,
+    border-color 320ms ease,
+    color 220ms ease;
+  overflow: hidden;
+  cursor: pointer;
+  will-change: transform, box-shadow;
+}
+
+/* Top sheen sweep on hover */
+.btn-luxe::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.16) 50%,
+    transparent 70%
+  );
+  transform: translateX(-110%);
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Soft outer glow halo */
+.btn-luxe::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(167, 139, 250, 0.35),
+    rgba(236, 72, 153, 0.25),
+    rgba(167, 139, 250, 0.35)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 320ms ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.btn-luxe > * {
+  position: relative;
+  z-index: 2;
+}
+
+.btn-luxe:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.25),
+    0 10px 28px -10px rgba(0, 0, 0, 0.6),
+    0 0 24px -6px rgba(167, 139, 250, 0.45);
+}
+
+.btn-luxe:hover::before {
+  transform: translateX(110%);
+}
+
+.btn-luxe:hover::after {
+  opacity: 1;
+}
+
+.btn-luxe:focus-visible {
+  outline: none;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.14),
+    0 0 0 2px rgba(167, 139, 250, 0.55),
+    0 0 28px -6px rgba(167, 139, 250, 0.55);
+}
+
+/* Smooth, satisfying click depression with elastic ease-out */
+.btn-luxe:active {
+  transform: translateY(0.5px) scale(0.965);
+  transition:
+    transform 90ms cubic-bezier(0.4, 0, 0.6, 1),
+    box-shadow 90ms ease;
+  box-shadow:
+    inset 0 2px 6px 0 rgba(0, 0, 0, 0.45),
+    0 2px 8px -4px rgba(0, 0, 0, 0.5),
+    0 0 18px -8px rgba(167, 139, 250, 0.5);
+}
+
+/* Ripple emitted on click */
+.btn-luxe .luxe-ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  pointer-events: none;
+  z-index: 3;
+  animation: luxe-ripple 650ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes luxe-ripple {
+  0%   { transform: translate(-50%, -50%) scale(0);   opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(3.2); opacity: 0;   }
+}
+
+.btn-luxe:disabled,
+.btn-luxe[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.05),
+    0 4px 10px -6px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ── Color variants — tint the base luxe button ── */
+.btn-luxe-success {
+  color: #d1fadf;
+  background: linear-gradient(
+    180deg,
+    rgba(34, 197, 94, 0.22) 0%,
+    rgba(34, 197, 94, 0.08) 100%
+  );
+  border-color: rgba(74, 222, 128, 0.40);
+}
+.btn-luxe-success:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(34, 197, 94, 0.32) 0%,
+    rgba(34, 197, 94, 0.14) 100%
+  );
+  border-color: rgba(74, 222, 128, 0.65);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.14),
+    0 10px 28px -10px rgba(0, 0, 0, 0.6),
+    0 0 28px -6px rgba(74, 222, 128, 0.55);
+}
+.btn-luxe-success::after {
+  background: linear-gradient(
+    135deg,
+    rgba(74, 222, 128, 0.55),
+    rgba(34, 197, 94, 0.35),
+    rgba(74, 222, 128, 0.55)
+  );
+}
+
+.btn-luxe-info {
+  color: #dbeafe;
+  background: linear-gradient(
+    180deg,
+    rgba(59, 130, 246, 0.22) 0%,
+    rgba(59, 130, 246, 0.08) 100%
+  );
+  border-color: rgba(96, 165, 250, 0.40);
+}
+.btn-luxe-info:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(59, 130, 246, 0.32) 0%,
+    rgba(59, 130, 246, 0.14) 100%
+  );
+  border-color: rgba(96, 165, 250, 0.65);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.14),
+    0 10px 28px -10px rgba(0, 0, 0, 0.6),
+    0 0 28px -6px rgba(96, 165, 250, 0.55);
+}
+.btn-luxe-info::after {
+  background: linear-gradient(
+    135deg,
+    rgba(96, 165, 250, 0.55),
+    rgba(59, 130, 246, 0.35),
+    rgba(96, 165, 250, 0.55)
+  );
+}
+
+.btn-luxe-danger {
+  color: #fee2e2;
+  background: linear-gradient(
+    180deg,
+    rgba(239, 68, 68, 0.30) 0%,
+    rgba(239, 68, 68, 0.12) 100%
+  );
+  border-color: rgba(248, 113, 113, 0.50);
+}
+.btn-luxe-danger:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(239, 68, 68, 0.42) 0%,
+    rgba(239, 68, 68, 0.18) 100%
+  );
+  border-color: rgba(248, 113, 113, 0.75);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.14),
+    0 10px 28px -10px rgba(0, 0, 0, 0.6),
+    0 0 30px -6px rgba(248, 113, 113, 0.6);
+}
+.btn-luxe-danger::after {
+  background: linear-gradient(
+    135deg,
+    rgba(248, 113, 113, 0.55),
+    rgba(239, 68, 68, 0.35),
+    rgba(248, 113, 113, 0.55)
+  );
+}
+
+.btn-luxe-neutral {
+  color: #e2e8f0;
+  background: linear-gradient(
+    180deg,
+    rgba(148, 163, 184, 0.18) 0%,
+    rgba(148, 163, 184, 0.06) 100%
+  );
+  border-color: rgba(203, 213, 225, 0.25);
+}
+
+/* Round (icon) variant — preserve circular shape */
+.btn-luxe-round {
+  border-radius: 9999px;
+  padding: 0.75rem;
+}
+
+/* Pill variant */
+.btn-luxe-pill {
+  border-radius: 9999px;
+}
+
+/* Chat (purple) variant — matches Call/Video luxe pills */
+.chat-luxe {
+  color: #f3e8ff;
+  background: linear-gradient(
+    180deg,
+    rgba(168, 85, 247, 0.26) 0%,
+    rgba(168, 85, 247, 0.10) 100%
+  );
+  border-color: rgba(192, 132, 252, 0.45);
+}
+.chat-luxe:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(168, 85, 247, 0.38) 0%,
+    rgba(168, 85, 247, 0.16) 100%
+  );
+  border-color: rgba(192, 132, 252, 0.70);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.14),
+    0 10px 28px -10px rgba(0, 0, 0, 0.6),
+    0 0 28px -6px rgba(192, 132, 252, 0.60);
+}
+.chat-luxe::after {
+  background: linear-gradient(
+    135deg,
+    rgba(192, 132, 252, 0.55),
+    rgba(168, 85, 247, 0.35),
+    rgba(192, 132, 252, 0.55)
+  );
+}
+
+/* Honour reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .btn-luxe,
+  .btn-luxe::before,
+  .btn-luxe::after,
+  .btn-luxe .luxe-ripple {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
+  .btn-luxe:hover { transform: none; }
+  .btn-luxe:active { transform: scale(0.985); }
+}
+
+/* Loading Spinner */
+.spinner {
+  border: 4px solid rgba(139, 92, 246, 0.1);
+  border-radius: 50%;
+  border-top-color: #a78bfa;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .pip-window {
+    width: 200px;
+    height: 112px;
+    bottom: 80px;
+    right: 10px;
+  }
+  
+  .call-window {
+    width: 95%;
+    height: 90vh;
+  }
+}
+
+/* ═════════════════════════════════════════════════════════════════
+   LUXE LAYER — Apple-style frosted glass, ambient aurora background,
+   ultra-smooth transitions, and refined micro-interactions.
+   Applied via global selectors so every existing card/nav/modal in
+   the app is upgraded WITHOUT touching individual component files.
+   ═════════════════════════════════════════════════════════════════ */
+
+/* ── Global typography & body smoothing ── */
+html {
+  background:
+    radial-gradient(70% 55% at 18% 12%,  rgba(167, 139, 250, 0.55) 0%, transparent 60%),
+    radial-gradient(55% 45% at 88% 22%,  rgba(236, 72, 153, 0.38)  0%, transparent 65%),
+    radial-gradient(65% 50% at 72% 92%,  rgba(56, 189, 248, 0.30)  0%, transparent 65%),
+    radial-gradient(50% 40% at 8% 88%,   rgba(168, 85, 247, 0.40)  0%, transparent 65%),
+    radial-gradient(40% 35% at 50% 50%,  rgba(217, 70, 239, 0.18)  0%, transparent 70%),
+    linear-gradient(180deg, #08060f 0%, #0c0818 45%, #08060f 100%);
+  background-attachment: fixed;
+  font-feature-settings: "ss01", "cv11", "calt", "rlig";
+  text-rendering: optimizeLegibility;
+}
+
+body, #root {
+  background: transparent;
+}
+
+body {
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Animated aurora layer drifting subtly on top of the html background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: -15%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(45% 35% at 25% 30%, rgba(167, 139, 250, 0.28) 0%, transparent 65%),
+    radial-gradient(40% 32% at 78% 70%, rgba(236, 72, 153, 0.22)  0%, transparent 65%),
+    radial-gradient(35% 28% at 60% 18%, rgba(56, 189, 248, 0.18)  0%, transparent 65%);
+  animation: aurora-drift 22s ease-in-out infinite alternate;
+  filter: saturate(130%) blur(10px);
+}
+
+/* Subtle film grain to kill banding on the dark gradient */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.03;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+@keyframes aurora-drift {
+  0%   { transform: translate3d(0,0,0) scale(1);   filter: hue-rotate(0deg)   saturate(115%); }
+  50%  { transform: translate3d(2%,1%,0) scale(1.04); filter: hue-rotate(8deg)  saturate(125%); }
+  100% { transform: translate3d(-2%,-1%,0) scale(1.02); filter: hue-rotate(-6deg) saturate(120%); }
+}
+
+/* Make the existing slate gradient backgrounds transparent so the
+   aurora shines through cleanly. Tailwind compiles these to specific
+   class names — we override at the className level. */
+.bg-gradient-to-br.from-slate-900,
+.bg-gradient-to-br.from-slate-950,
+[class*="from-slate-950"][class*="via-purple-950"],
+[class*="from-slate-900"][class*="via-purple-900"],
+.min-h-screen.bg-slate-950,
+.min-h-screen.bg-slate-900,
+div[class~="bg-slate-950"]:not([class*="/"]),
+div[class~="bg-slate-900"]:not([class*="/"]) {
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+/* ── Apple-style frosted glass card auto-upgrade ──
+   Targets the recurring `bg-slate-900/XX backdrop-blur-xl rounded-2xl`
+   pattern used across Lobby, Profile, Admin, Room, etc.
+   Excludes form fields and buttons so they keep their own styling. */
+div[class*="backdrop-blur-xl"][class*="rounded-2xl"]:not([class*="bg-red-"]):not([class*="bg-green-"]):not([class*="bg-blue-"]):not(button):not(input):not(textarea),
+section[class*="backdrop-blur-xl"][class*="rounded-2xl"],
+[class*="backdrop-blur-xl"][class*="border-purple-500"][class*="rounded-2xl"]:not(button):not(input):not(textarea),
+[class*="backdrop-blur-2xl"][class*="rounded-2xl"]:not(button):not(input):not(textarea) {
+  position: relative;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.07) 0%,
+      rgba(255, 255, 255, 0.025) 40%,
+      rgba(255, 255, 255, 0.01) 100%
+    ),
+    rgba(14, 12, 24, 0.58) !important;
+  backdrop-filter: blur(28px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.09) !important;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.10),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.30),
+    0 1px 1px rgba(0, 0, 0, 0.20),
+    0 12px 40px -12px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.025) !important;
+  transition:
+    transform 600ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 600ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 600ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 600ms ease !important;
+}
+
+/* Specular highlight along the top of every glass card */
+div[class*="backdrop-blur-xl"][class*="rounded-2xl"]:not(button):not(input):not(textarea)::before,
+section[class*="backdrop-blur-xl"][class*="rounded-2xl"]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.10) 0%,
+    rgba(255, 255, 255, 0.025) 18%,
+    transparent 45%
+  );
+  opacity: 0.9;
+  z-index: 0;
+}
+
+/* Ensure card children sit above the specular highlight pseudo */
+div[class*="backdrop-blur-xl"][class*="rounded-2xl"] > *,
+section[class*="backdrop-blur-xl"][class*="rounded-2xl"] > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hover lift for hoverable cards (those with hover:border on them) */
+[class*="backdrop-blur-xl"][class*="rounded-2xl"][class*="hover:border-purple"]:hover {
+  transform: translateY(-2px);
+  border-color: rgba(167, 139, 250, 0.35) !important;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.30),
+    0 18px 50px -14px rgba(0, 0, 0, 0.65),
+    0 0 40px -10px rgba(167, 139, 250, 0.35) !important;
+}
+
+/* ── shadcn <Card> component (used in Login/Register) — Apple glass ──
+   Scoped to rounded card-like elements only so it does not match
+   sticky headers or fixed sidebars that happen to share these utility classes. */
+[class*="bg-slate-900/"][class*="backdrop-blur-xl"][class*="border-purple-500"][class*="rounded-"]:not(header):not(aside):not(nav),
+.bg-card,
+div.rounded-xl.border.bg-card {
+  position: relative;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.07) 0%,
+      rgba(255, 255, 255, 0.02) 60%,
+      rgba(255, 255, 255, 0.005) 100%
+    ),
+    rgba(14, 12, 24, 0.62) !important;
+  backdrop-filter: blur(30px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.10),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.30),
+    0 24px 60px -18px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(255, 255, 255, 0.03) !important;
+}
+
+/* Reusable Apple-glass utility for any new components that want it */
+.glass-card {
+  position: relative;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%),
+    rgba(14, 12, 24, 0.6);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 1.25rem;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.10),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.30),
+    0 12px 40px -12px rgba(0, 0, 0, 0.55);
+  transition: all 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Inputs & textareas: softer focus, smoother transitions ── */
+input, textarea, select {
+  transition:
+    background-color 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 250ms ease !important;
+}
+
+input:focus, textarea:focus, select:focus,
+input:focus-visible, textarea:focus-visible {
+  outline: none !important;
+  border-color: rgba(167, 139, 250, 0.6) !important;
+  box-shadow:
+    0 0 0 4px rgba(167, 139, 250, 0.12),
+    0 0 24px -6px rgba(167, 139, 250, 0.35) !important;
+}
+
+/* ── Universal smooth transition for icon links / nav items ── */
+a, [role="button"] {
+  transition:
+    color 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 320ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 280ms ease;
+}
+
+[role="button"]:active {
+  transform: scale(0.97);
+}
+
+/* ── Refined gradient-pill buttons (purple→pink primary CTA) ──
+   Targets the common `bg-gradient-to-r from-purple-* to-pink-*` buttons. */
+button[class*="from-purple-"][class*="to-pink-"],
+button[class*="from-purple-600"],
+button[class*="from-blue-600"][class*="to-purple-"] {
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.20),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.25),
+    0 10px 30px -10px rgba(167, 139, 250, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+button[class*="from-purple-"][class*="to-pink-"]::after,
+button[class*="from-purple-600"]::after,
+button[class*="from-blue-600"][class*="to-purple-"]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 70%
+  );
+  transform: translateX(-110%);
+  transition: transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+button[class*="from-purple-"][class*="to-pink-"]:hover::after,
+button[class*="from-purple-600"]:hover::after,
+button[class*="from-blue-600"][class*="to-purple-"]:hover::after {
+  transform: translateX(110%);
+}
+
+button[class*="from-purple-"][class*="to-pink-"]:hover,
+button[class*="from-purple-600"]:hover,
+button[class*="from-blue-600"][class*="to-purple-"]:hover {
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.25),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.25),
+    0 18px 40px -12px rgba(167, 139, 250, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+/* Smooth secondary "pill" buttons (slate-800/50 family) */
+button[class*="bg-slate-800"][class*="rounded-2xl"],
+button[class*="bg-slate-800"][class*="rounded-xl"],
+button[class*="bg-slate-800"][class*="rounded-full"] {
+  background-image:
+    linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+    0 6px 18px -8px rgba(0, 0, 0, 0.45);
+}
+
+button[class*="bg-slate-800"][class*="rounded-2xl"]:hover,
+button[class*="bg-slate-800"][class*="rounded-xl"]:hover,
+button[class*="bg-slate-800"][class*="rounded-full"]:hover {
+  background-image:
+    linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.02) 100%) !important;
+  border-color: rgba(167, 139, 250, 0.45) !important;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.14),
+    0 12px 28px -10px rgba(167, 139, 250, 0.35);
+}
+
+/* ── Ultra-smooth view fade-in for App's screen transitions ── */
+.luxe-view-fade {
+  animation: luxe-view-in 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: opacity, transform, filter;
+}
+
+@keyframes luxe-view-in {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.992); filter: blur(8px); }
+  60%  { opacity: 1; filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0)   scale(1);     filter: blur(0); }
+}
+
+/* ── Sonner toast — match the luxe glass aesthetic ── */
+[data-sonner-toaster] [data-sonner-toast] {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+    rgba(14, 12, 24, 0.85) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border: 1px solid rgba(167, 139, 250, 0.35) !important;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255,255,255,0.10),
+    0 18px 50px -14px rgba(0,0,0,0.65) !important;
+}
+
+/* ── Scrollbar refinement ── */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(167, 139, 250, 0.7), rgba(236, 72, 153, 0.55));
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(167, 139, 250, 0.9), rgba(236, 72, 153, 0.75));
+}
+
+/* ── Selection color ── */
+::selection {
+  background: rgba(167, 139, 250, 0.35);
+  color: #fff;
+}
+
+/* ── Subtle floating-orb decoration available as <div className="luxe-orb" /> ── */
+.luxe-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(60px);
+  pointer-events: none;
+  opacity: 0.55;
+  animation: orb-float 14s ease-in-out infinite alternate;
+}
+@keyframes orb-float {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(4%, -6%, 0) scale(1.08); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  body::before { animation: none; }
+  .luxe-view-fade { animation-duration: 0ms; }
+  .luxe-orb { animation: none; }
+}
